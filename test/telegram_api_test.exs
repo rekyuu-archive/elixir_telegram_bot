@@ -1,6 +1,6 @@
-defmodule TelegramApiTest do
+defmodule TelegramBotTest do
   use ExUnit.Case
-  doctest TelegramApi
+  doctest TelegramBot
 
   test "the truth" do
     assert 1 + 1 == 2

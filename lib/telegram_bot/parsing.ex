@@ -1,6 +1,6 @@
-defmodule TelegramApi.Parsing do
+defmodule TelegramBot.Parsing do
   use GenServer
-  import TelegramApi.Commands
+  import TelegramBot.Commands
 
   def start_link(opts \\ []) do
     require Logger

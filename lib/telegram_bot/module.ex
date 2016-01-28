@@ -1,7 +1,7 @@
-defmodule TelegramApi.Module do
+defmodule TelegramBot.Module do
   defmacro __using__(_options) do
     quote do
-      import TelegramApi.Module
+      import TelegramBot.Module
     end
   end
 

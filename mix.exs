@@ -1,8 +1,8 @@
-defmodule TelegramApi.Mixfile do
+defmodule TelegramBot.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :telegram_api,
+    [app: :telegram_bot,
      version: "0.0.1",
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
@@ -15,7 +15,7 @@ defmodule TelegramApi.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger, :httpoison, :nadia],
-     mod: {TelegramApi, []}
+     mod: {TelegramBot, []}
     ]
   end
 

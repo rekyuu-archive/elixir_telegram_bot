@@ -1,4 +1,4 @@
-defmodule TelegramApi do
+defmodule TelegramBot do
   use Application
   use Supervisor
 
@@ -7,8 +7,8 @@ defmodule TelegramApi do
     Logger.log :info, "Starting bot supervisors."
 
     children = [
-      supervisor(TelegramApi.Polling, [[name: TelegramApi.Polling]]),
-      supervisor(TelegramApi.Parsing, [[name: TelegramApi.Parsing]])
+      supervisor(TelegramBot.Polling, [[name: TelegramBot.Polling]]),
+      supervisor(TelegramBot.Parsing, [[name: TelegramBot.Parsing]])
     ]
 
     {:ok, _pid} = Supervisor.start_link(children, strategy: :one_for_one)

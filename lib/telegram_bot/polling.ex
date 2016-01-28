@@ -1,4 +1,4 @@
-defmodule TelegramApi.Polling do
+defmodule TelegramBot.Polling do
   use GenServer
 
   def start_link(opts \\ []) do
@@ -12,7 +12,7 @@ defmodule TelegramApi.Polling do
     require Logger
 
     try do
-      GenServer.cast(TelegramApi.Parsing, {:parse, msg})
+      GenServer.cast(TelegramBot.Parsing, {:parse, msg})
     rescue
       e in MatchError -> Logger.log :warn, "[ERR] #{msg}, #{e}"
     end

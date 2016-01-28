@@ -1,5 +1,5 @@
-defmodule TelegramApi.Commands do
-  use TelegramApi.Module
+defmodule TelegramBot.Commands do
+  use TelegramBot.Module
 
   command "kuma", do: reply "Kuma ~"
   command "say" <> message, do: reply message
