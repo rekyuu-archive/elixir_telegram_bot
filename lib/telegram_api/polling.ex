@@ -9,10 +9,12 @@ defmodule TelegramApi.Polling do
   end
 
   def process_message(msg) do
+    require Logger
+
     try do
       GenServer.cast(TelegramApi.Parsing, {:parse, msg})
     rescue
-      e in MatchError -> Logger.log :warn, "[ERR] #{msg}"
+      e in MatchError -> Logger.log :warn, "[ERR] #{msg}, #{e}"
     end
   end
 

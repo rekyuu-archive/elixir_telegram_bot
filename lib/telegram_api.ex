@@ -11,7 +11,7 @@ defmodule TelegramApi do
 
     children = [
       supervisor(TelegramApi.Polling, [[name: TelegramApi.Polling]]),
-      supervisor(TelegramApi.Parsing, [[name: TelegramApi.Parsing]])
+      supervisor(TelegramApi.ModuleSupervisor, [[name: TelegramApi.ModuleSupervisor]])
     ]
 
     {:ok, _pid} = Supervisor.start_link(children, strategy: :one_for_one)
