@@ -1,0 +1,21 @@
+%{
+	message =>
+	%{
+		chat =>
+		%{
+			id => -29754132,
+			title => "Bad Opinion Zone",
+			type => "group"
+		},
+		date => 1449176374,
+		from =>
+		%{
+			first_name => "rekyuu",
+			id => 93017454,
+			username => "rekyuu"
+		},
+		message_id => 3867,
+		text => "Wizzie you speak as if you're cultured"
+	},
+	update_id => 144752308
+}
