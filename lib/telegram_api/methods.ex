@@ -22,11 +22,11 @@ defmodule TelegramApi.Methods do
   defp get_result(url) do
     require Logger
 
-    response = HTTPotion.post api_url <> url
-    response_map = Poison.Parser.parse!((response.body), keys: :atoms)
-    # Logger.log :debug, response_map.ok
+    request = HTTPotion.post api_url <> url
+    response = Poison.Parser.parse!((request.body), keys: :atoms)
+    # Logger.log :debug, response.ok
 
-    response_map.result
+    response.result
   end
 
   def get_updates(offset) do

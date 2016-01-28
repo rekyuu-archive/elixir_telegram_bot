@@ -4,7 +4,7 @@ defmodule TelegramApi do
 
   def start(_type, _args) do
     require Logger
-    Logger.log :debug, "Starting bot supervisors."
+    Logger.log :info, "Starting bot supervisors."
 
     children = [
       supervisor(TelegramApi.Polling, [[name: TelegramApi.Polling]]),
