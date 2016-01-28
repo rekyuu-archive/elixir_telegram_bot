@@ -3,13 +3,17 @@ defmodule TelegramApi.Polling do
   require Logger
 
   def start_link(opts \\ []) do
-    Logger.log :debug, "Starting polling."
+    Logger.log :info, "Starting polling."
     GenServer.start_link(__MODULE__, :ok, opts)
   end
 
-  def process_message(%{text: _} = msg), do: Logger.log :debug, "[MSG] #{msg.text}"
-  def process_message(%{photo: _} = msg), do: Logger.log :debug, "[IMG] -----"
-  def process_message(msg), do: Logger.log :debug, "[???] ?????"
+  def process_message(msg) do
+    try do
+      GenServer.cast(TelegramApi.Parsing, {:parse, msg})
+    rescue
+      e in MatchError -> Logger.log :warn, "[ERR] #{msg}"
+    end
+  end
 
   def process_messages_list(nil), do: -1
   def process_messages_list(results) do
