@@ -32,5 +32,5 @@ use Mix.Config
 # Example config:
 #
 # config :telegram_api,
-#  api_key: "api_key_here"
+#   api_key: "api_key_here"
 import_config "secret.exs"
