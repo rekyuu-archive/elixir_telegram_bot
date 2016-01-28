@@ -20,13 +20,17 @@ defmodule TelegramApi.Methods do
   end
 
   defp get_result(url) do
+    require Logger
+
     response = HTTPotion.post api_url <> url
-    Poison.Parser.parse!((response.body), keys: :atoms).result
+    response_map = Poison.Parser.parse!((response.body), keys: :atoms)
+    # Logger.log :debug, response_map.ok
+
+    response_map.result
   end
 
   def get_updates(offset) do
-    results = "/getUpdates?offset=#{offset}"
-              |> get_result
+    results = "/getUpdates?offset=#{offset}" |> get_result
 
     if length(results) >= 1 do
       results

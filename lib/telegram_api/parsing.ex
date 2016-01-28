@@ -1,5 +1,6 @@
 defmodule TelegramApi.Parsing do
   use GenServer
+  import TelegramApi.Commands
 
   def start_link(opts \\ []) do
     require Logger
@@ -9,9 +10,12 @@ defmodule TelegramApi.Parsing do
   end
 
   def handle_cast({:parse, msg}, state) do
-    match_msg(msg)
+    try do
+      match_msg(msg)
+    rescue
+      _ -> nil
+    end
+
     {:noreply, state}
   end
-
-  def match_msg(_), do: nil
 end

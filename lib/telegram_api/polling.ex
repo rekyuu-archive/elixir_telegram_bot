@@ -32,7 +32,7 @@ defmodule TelegramApi.Polling do
   def handle_info({:update, id}, state) do
     new_id = id |> TelegramApi.Methods.get_updates |> process_messages_list
 
-    :erlang.send_after(1000, self, {:update, new_id + 1})
+    :erlang.send_after(100, self, {:update, new_id + 1})
     {:noreply, state}
   end
 end
