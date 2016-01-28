@@ -2,7 +2,12 @@ defmodule TelegramBot.Commands do
   use TelegramBot.Module
 
   command "kuma", do: reply "Kuma ~"
-  command "say" <> message, do: reply message
+
+  command "say" do
+    [_ | repeat] = String.split(msg.text)
+    repeat |> Enum.join(" ") |> reply
+  end
+
   command "help", do: reply "I'll put something\nhere eventually."
 
   command "dank" do
