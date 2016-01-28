@@ -17,7 +17,7 @@ defmodule TelegramBot.Module do
 
   defmacro command(text, do: func) do
     quote do
-      def match_msg(%{text: "/" <> unquote(text)} = var!(msg)) do
+      def match_msg(%{text: "/" <> unquote(text) <> _} = var!(msg)) do
         unquote(func)
       end
     end
