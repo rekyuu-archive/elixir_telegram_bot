@@ -18,8 +18,8 @@ defmodule TelegramApi.Polling do
     end
   end
 
-  def process_messages_list(nil), do: -1
-  def process_messages_list(results) do
+  def process_messages_list({:ok, []}), do: -1
+  def process_messages_list({:ok, results}) do
     for item <- results, do: item.message |> process_message
     List.last(results).update_id
   end
@@ -30,7 +30,7 @@ defmodule TelegramApi.Polling do
   end
 
   def handle_info({:update, id}, state) do
-    new_id = id |> TelegramApi.Methods.get_updates |> process_messages_list
+    new_id = Nadia.get_updates([offset: id]) |> process_messages_list
 
     :erlang.send_after(100, self, {:update, new_id + 1})
     {:noreply, state}

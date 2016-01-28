@@ -14,7 +14,7 @@ defmodule TelegramApi.Commands do
 
   command "s " <> search_term do
     url = String.split(search_term) |> Enum.join("%20")
-    request = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=#{url}" |> HTTPotion.get
+    request = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=#{url}" |> HTTPoison.get!
     response = Poison.Parser.parse!((request.body), keys: :atoms)
     result = response.responseData.results |> List.first
 
@@ -23,7 +23,7 @@ defmodule TelegramApi.Commands do
 
   command "yt " <> search_term do
     url = String.split(search_term) |> Enum.join("%20")
-    request = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=youtube%20#{url}" |> HTTPotion.get
+    request = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=youtube%20#{url}" |> HTTPoison.get!
     response = Poison.Parser.parse!((request.body), keys: :atoms)
     result = response.responseData.results |> List.first
 

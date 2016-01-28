@@ -1,4 +1,11 @@
-%{"httpotion": {:hex, :httpotion, "2.1.0"},
+%{"certifi": {:hex, :certifi, "0.3.0"},
+  "hackney": {:hex, :hackney, "1.4.8"},
+  "httpoison": {:hex, :httpoison, "0.8.1"},
+  "httpotion": {:hex, :httpotion, "2.1.0"},
   "ibrowse": {:git, "https://github.com/cmullaparthi/ibrowse.git", "ea3305d21f37eced4fac290f64b068e56df7de80", [tag: "v4.1.2"]},
+  "idna": {:hex, :idna, "1.0.3"},
   "jsx": {:hex, :jsx, "2.8.0"},
-  "poison": {:hex, :poison, "1.5.0"}}
+  "mimerl": {:hex, :mimerl, "1.0.2"},
+  "nadia": {:hex, :nadia, "0.3.3"},
+  "poison": {:hex, :poison, "1.5.0"},
+  "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}

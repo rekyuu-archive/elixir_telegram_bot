@@ -1,6 +1,4 @@
 defmodule TelegramApi.Module do
-  alias TelegramApi.Methods
-
   defmacro __using__(_options) do
     quote do
       import TelegramApi.Module
@@ -27,7 +25,7 @@ defmodule TelegramApi.Module do
 
   defmacro reply(text) do
     quote do
-      Methods.send_message(var!(msg).chat.id, urlize(unquote(text)))
+      Nadia.send_message(var!(msg).chat.id, urlize(unquote(text)))
     end
   end
 end
