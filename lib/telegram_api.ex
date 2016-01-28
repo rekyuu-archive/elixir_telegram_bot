@@ -6,6 +6,9 @@ defmodule TelegramApi do
     require Logger
     Logger.log :debug, "Starting bot supervisors."
 
+    :pg2.start()
+    :pg2.create(:modules)
+
     children = [
       supervisor(TelegramApi.Polling, [[name: TelegramApi.Polling]]),
       supervisor(TelegramApi.Parsing, [[name: TelegramApi.Parsing]])

@@ -1,8 +1,9 @@
 defmodule TelegramApi.Polling do
   use GenServer
-  require Logger
 
   def start_link(opts \\ []) do
+    require Logger
+
     Logger.log :info, "Starting polling."
     GenServer.start_link(__MODULE__, :ok, opts)
   end
