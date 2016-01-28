@@ -5,7 +5,15 @@ defmodule TelegramBot.Module do
     end
   end
 
-  def urlize(text), do: String.split(text, "\n") |> Enum.join("%0A")
+  defmacro command(command_list, do: func) when is_list(command_list) do
+    for text <- command_list do
+      quote do
+        def match_msg(%{text: "/" <> unquote(text) <> _} = var!(msg)) do
+          unquote(func)
+        end
+      end
+    end
+  end
 
   defmacro command(text, do: func) do
     quote do
@@ -25,7 +33,7 @@ defmodule TelegramBot.Module do
 
   defmacro reply(text) do
     quote do
-      Nadia.send_message(var!(msg).chat.id, urlize(unquote(text)))
+      Nadia.send_message(var!(msg).chat.id, unquote(text))
     end
   end
 end

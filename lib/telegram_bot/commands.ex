@@ -3,7 +3,7 @@ defmodule TelegramBot.Commands do
 
   command "kuma", do: reply "Kuma ~"
   command "say" <> message, do: reply message
-  command "help", do: reply "I'll put something here eventually."
+  command "help", do: reply "I'll put something\nhere eventually."
 
   command "dank" do
     case msg do
@@ -12,8 +12,10 @@ defmodule TelegramBot.Commands do
     end
   end
 
-  command "s " <> search_term do
-    url = String.split(search_term) |> Enum.join("%20")
+  command ["s", "google", "find", "search"] do
+    [_ | search_term] = String.split(msg.text)
+
+    url = search_term |> Enum.join("%20")
     request = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=#{url}" |> HTTPoison.get!
     response = Poison.Parser.parse!((request.body), keys: :atoms)
     result = response.responseData.results |> List.first
@@ -21,8 +23,10 @@ defmodule TelegramBot.Commands do
     reply result.unescapedUrl
   end
 
-  command "yt " <> search_term do
-    url = String.split(search_term) |> Enum.join("%20")
+  command "yt" do
+    [_ | search_term] = String.split(msg.text)
+
+    url = search_term |> Enum.join("%20")
     request = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=youtube%20#{url}" |> HTTPoison.get!
     response = Poison.Parser.parse!((request.body), keys: :atoms)
     result = response.responseData.results |> List.first
