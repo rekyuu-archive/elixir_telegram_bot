@@ -40,11 +40,12 @@ defmodule TelegramBot.Commands do
   end
 
   command ["dan", "danbooru"] do
-    dan = "danbooru.donmai.us"
     [_ | search_term] = String.split(msg.text)
 
+    dan = "danbooru.donmai.us"
     query = search_term |> Enum.join("_") |> URI.encode_www_form
     request = "http://#{dan}/posts.json?limit=50&page=1&tags=#{query}+rating:safe" |> HTTPoison.get!
+
     try do
       result = Poison.Parser.parse!((request.body), keys: :atoms) |> Enum.random
 
