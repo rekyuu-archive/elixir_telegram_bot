@@ -57,7 +57,7 @@ defmodule TelegramBot.Module do
 
   defmacro reply_no_preview(text) do
     quote do
-      Nadia.send_message(var!(msg).chat.id, unquote(text), [:disable_web_page_preview])
+      Nadia.send_message(var!(msg).chat.id, unquote(text), [disable_web_page_preview: true])
     end
   end
 
