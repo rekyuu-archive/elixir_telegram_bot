@@ -1,4 +1,4 @@
-# Telegram Bot API for Elixir
+# Elixir Telegram Bot
 
 A elixir app that uses Telegram methods from [Nadia](https://github.com/zhyu/nadia) to poll for updates and respond to them.
 
@@ -7,8 +7,8 @@ If you don't know much about Telegram bots, I suggest reading the [Telegram Bot 
 ## Installation
 
 ```
-$ git clone https://github.com/rekyuu/ElixirTelegramBotAPI
-$ cd ElixirTelegramBotAPI
+$ git clone https://github.com/rekyuu/elixir_telegram_bot
+$ cd elixir_telegram_bot
 $ mix deps.get
 ```
 
