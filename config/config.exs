@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :telegram_api, key: :value
+#     config :telegram_bot, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:telegram_api, :key)
+#     Application.get_env(:telegram_bot, :key)
 #
 # Or configure a 3rd-party app:
 #
@@ -29,7 +29,7 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
-# Example config:
+# Example secret config:
 #
 # config :nadia,
 #   token: "api_key_here"
