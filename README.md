@@ -55,7 +55,7 @@ reply_photo_with_caption "/path/to/image.png", "caption text"
 
 ## Message handling
 
-Each of the above wrappers handle the incoming message as a [Nadia struct]() and is passed as the variable `msg`. The example given in `commands.ex` is as follows: 
+Each of the above wrappers handle the incoming message as a [Nadia struct](https://hexdocs.pm/nadia/Nadia.Model.html) and is passed as the variable `msg`. The example given in `commands.ex` is as follows: 
 
 ```elixir
 match ["hello", "hi", "hey", "sup"] do
