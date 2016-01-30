@@ -8,7 +8,11 @@ defmodule TelegramBot.Module do
   defmacro command(command_list, do: func) when is_list(command_list) do
     for text <- command_list do
       quote do
-        def match_msg(%{text: "/" <> unquote(text) <> _} = var!(msg)) do
+        def match_msg(%{text: "/" <> unquote(text)} = var!(msg)) do
+          Task.async(fn -> unquote(func) end)
+        end
+
+        def match_msg(%{text: "/" <> unquote(text) <> " " <> _} = var!(msg)) do
           Task.async(fn -> unquote(func) end)
         end
       end
@@ -17,7 +21,11 @@ defmodule TelegramBot.Module do
 
   defmacro command(text, do: func) do
     quote do
-      def match_msg(%{text: "/" <> unquote(text) <> _} = var!(msg)) do
+      def match_msg(%{text: "/" <> unquote(text)} = var!(msg)) do
+        Task.async(fn -> unquote(func) end)
+      end
+
+      def match_msg(%{text: "/" <> unquote(text) <> " " <> _} = var!(msg)) do
         Task.async(fn -> unquote(func) end)
       end
     end
