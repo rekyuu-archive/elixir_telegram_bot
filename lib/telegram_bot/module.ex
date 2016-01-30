@@ -1,4 +1,6 @@
 defmodule TelegramBot.Module do
+  @bot Application.get_env(:telegram_bot, :username)
+
   defmacro __using__(_options) do
     quote do
       import TelegramBot.Module
@@ -6,6 +8,8 @@ defmodule TelegramBot.Module do
   end
 
   defmacro command(command_list, do: func) when is_list(command_list) do
+    {:ok, bot} = Nadia.get_me
+
     for text <- command_list do
       quote do
         def match_msg(%{text: "/" <> unquote(text)} = var!(msg)) do
@@ -13,6 +17,14 @@ defmodule TelegramBot.Module do
         end
 
         def match_msg(%{text: "/" <> unquote(text) <> " " <> _} = var!(msg)) do
+          Task.async(fn -> unquote(func) end)
+        end
+
+        def match_msg(%{text: "/" <> unquote(text) <> "@" <> unquote(@bot)} = var!(msg)) do
+          Task.async(fn -> unquote(func) end)
+        end
+
+        def match_msg(%{text: "/" <> unquote(text) <> "@" <> unquote(@bot) <> " " <> _} = var!(msg)) do
           Task.async(fn -> unquote(func) end)
         end
       end
@@ -26,6 +38,14 @@ defmodule TelegramBot.Module do
       end
 
       def match_msg(%{text: "/" <> unquote(text) <> " " <> _} = var!(msg)) do
+        Task.async(fn -> unquote(func) end)
+      end
+
+      def match_msg(%{text: "/" <> unquote(text) <> "@" <> unquote(@bot)} = var!(msg)) do
+        Task.async(fn -> unquote(func) end)
+      end
+
+      def match_msg(%{text: "/" <> unquote(text) <> "@" <> unquote(@bot) <> " " <> _} = var!(msg)) do
         Task.async(fn -> unquote(func) end)
       end
     end

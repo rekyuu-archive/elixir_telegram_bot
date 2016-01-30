@@ -34,3 +34,6 @@ use Mix.Config
 # config :nadia,
 #   token: "api_key_here"
 import_config "secret.exs"
+
+config :telegram_bot,
+  username: "your_bot_name"
