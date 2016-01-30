@@ -1,9 +1,8 @@
 defmodule TelegramBot.Polling do
   use GenServer
+  require Logger
 
   def start_link(opts \\ []) do
-    require Logger
-
     Logger.log :info, "Starting polling."
     GenServer.start_link(__MODULE__, :ok, opts)
   end
@@ -23,6 +22,9 @@ defmodule TelegramBot.Polling do
     for item <- results, do: item.message |> process_message
     List.last(results).update_id
   end
+
+  def process_messages_list({:error, %Nadia.Model.Error{reason: :timeout}}), do: Logger.log :warn, "Telegram timed out!"
+  def process_messages_list({:error, error}), do: Logger.log :error, error
 
   def init(:ok) do
     send self, {:update, 0}
