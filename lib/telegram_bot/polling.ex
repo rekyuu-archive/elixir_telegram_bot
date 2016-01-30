@@ -8,8 +8,6 @@ defmodule TelegramBot.Polling do
   end
 
   def process_message(msg) do
-    require Logger
-
     try do
       GenServer.cast(TelegramBot.Parsing, {:parse, msg})
     rescue
