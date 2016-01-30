@@ -12,7 +12,14 @@ $ cd elixir_telegram_bot
 $ mix deps.get
 ```
 
-You now need to create `config/secret.exs` with the following contents:
+You will need to edit `config/config.exs` and add your bot's username:
+
+```elixir
+config :telegram_bot,
+  username: "your_bot_name"
+```
+
+Then you need to create `config/secret.exs` with the following contents:
 
 ```elixir
 use Mix.Config
