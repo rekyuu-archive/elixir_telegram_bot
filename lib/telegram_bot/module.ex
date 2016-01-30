@@ -23,7 +23,17 @@ defmodule TelegramBot.Module do
     end
   end
 
-  defmacro regex(text, do: func) do
+  defmacro match(match_list, do: func) when is_list(match_list) do
+    for text <- match_list do
+      quote do
+        def match_msg(%{text: unquote(text)} = var!(msg)) do
+          unquote(func)
+        end
+      end
+    end
+  end
+
+  defmacro match(text, do: func) do
     quote do
       def match_msg(%{text: unquote(text)} = var!(msg)) do
         unquote(func)
