@@ -8,8 +8,6 @@ defmodule TelegramBot.Module do
   end
 
   defmacro command(command_list, do: func) when is_list(command_list) do
-    {:ok, bot} = Nadia.get_me
-
     for text <- command_list do
       quote do
         def match_msg(%{text: "/" <> unquote(text)} = var!(msg)) do
