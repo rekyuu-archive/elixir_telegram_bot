@@ -9,7 +9,7 @@ defmodule TelegramBot.Polling do
 
   def process_message(msg) do
     try do
-      GenServer.cast(TelegramBot.Parsing, {:parse, msg})
+      GenServer.cast(TelegramBot.Parsing, {:match, msg})
     rescue
       e in MatchError -> Logger.log :warn, "[ERR] #{msg}, #{e}"
     end

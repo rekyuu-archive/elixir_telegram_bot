@@ -1,4 +1,4 @@
-defmodule TelegramBot.Parsing do
+defmodule TelegramBot.Matching do
   use GenServer
   import TelegramBot.Commands
 
@@ -9,7 +9,7 @@ defmodule TelegramBot.Parsing do
     GenServer.start_link(__MODULE__, :ok, opts)
   end
 
-  def handle_cast({:parse, msg}, state) do
+  def handle_cast({:match, msg}, state) do
     try do
       match_msg(msg)
     rescue

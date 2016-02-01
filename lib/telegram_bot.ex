@@ -11,7 +11,7 @@ defmodule TelegramBot do
 
     children = [
       supervisor(TelegramBot.Polling, [[name: TelegramBot.Polling]]),
-      supervisor(TelegramBot.Parsing, [[name: TelegramBot.Parsing]])
+      supervisor(TelegramBot.Matching, [[name: TelegramBot.Matching]])
     ]
 
     {:ok, _pid} = Supervisor.start_link(children, strategy: :one_for_one)
