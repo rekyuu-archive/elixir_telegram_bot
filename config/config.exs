@@ -36,4 +36,10 @@ use Mix.Config
 import_config "secret.exs"
 
 config :telegram_bot,
-  username: "your_bot_name"
+  username: "KitakamiBot"
+
+config :telegram_bot, TelegramBot.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "kitakami",
+  username: "postgres",
+  password: "postgres"

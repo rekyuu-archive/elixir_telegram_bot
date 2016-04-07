@@ -14,7 +14,7 @@ defmodule TelegramBot.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :nadia],
+    [applications: [:logger, :nadia, :postgrex, :ecto],
      mod: {TelegramBot, []}
     ]
   end
@@ -29,6 +29,9 @@ defmodule TelegramBot.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:nadia, "~> 0.3"}]
+    [{:nadia, "~> 0.3"},
+     {:postgrex, ">= 0.0.0"},
+     {:ecto, "~> 2.0.0-beta"}
+    ]
   end
 end
