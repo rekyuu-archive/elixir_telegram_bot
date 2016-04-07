@@ -134,7 +134,7 @@ defmodule TelegramBot.Util do
 
   def launch_torpedoes(msg) do
     words = String.split(msg.text)
-    chat = Repo.get_by(Chat, chat_id: msg.chat.id)
+    chat = Repo.get_by(Chat, chat_id: to_string(msg.chat.id))
 
     case chat do
       nil -> nil
@@ -162,14 +162,14 @@ defmodule TelegramBot.Util do
                 {_, false} -> nil
                 {user_id, true} ->
                   Nadia.send_message(user_id, "From #{msg.chat.title}")
-                  Nadia.forward_message(user_id, msg.chat.id, msg.message_id)
+                  Nadia.forward_message(user_id, to_string(msg.chat.id), msg.message_id)
                 match_list ->
                   for match <- match_list do
                     case match do
                       {_, false} -> nil
                       {user_id, true} ->
                         Nadia.send_message(user_id, "From #{msg.chat.title}")
-                        Nadia.forward_message(user_id, msg.chat.id, msg.message_id)
+                        Nadia.forward_message(user_id, to_string(msg.chat.id), msg.message_id)
                     end
                   end
               end
