@@ -16,7 +16,7 @@ defmodule TelegramBot.Commands do
     <> "/disable - Disables notifications in current chat (default).\n"
     <> "/mute - Mute all notifications.\n"
     <> "/unmute - Unmute all notifications.\n"
-    <> "/stop - Removes you completely and stops notifications."
+    <> "/stop - Removes you completely and stops notifications.\n"
     <> "\n"
     <> "Source (v1.0.1): https://github.com/rekyuu/elixir_telegram_bot/tree/kitakami"
   end
