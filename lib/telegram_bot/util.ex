@@ -133,49 +133,36 @@ defmodule TelegramBot.Util do
   end
 
   def launch_torpedoes(msg) do
-    words = String.split(msg.text)
     chat = Repo.get_by(Chat, chat_id: to_string(msg.chat.id))
 
-    case chat do
-      nil -> nil
-      chat ->
-        for user <- chat.users do
-          user = Repo.get_by(User, id: user)
-
-          unless msg.from.username == user.username do
-            matches = for word <- user.words do
-              case Enum.member?(words, word) do
-                true -> {user.user_id, true}
-                false ->
-                  {:ok, re_word} = Regex.compile(word)
-                  for msg_word <- words do
-                    case Regex.match?(re_word, msg_word) do
-                      true -> {user.user_id, true}
-                      false -> {user.user_id, false}
-                    end
-                  end
-              end
-            end
-
-            for match <- matches do
-              case match do
-                {_, false} -> nil
-                {user_id, true} ->
-                  Nadia.send_message(user_id, "From #{msg.chat.title}")
-                  Nadia.forward_message(user_id, to_string(msg.chat.id), msg.message_id)
-                match_list ->
-                  for match <- match_list do
-                    case match do
-                      {_, false} -> nil
-                      {user_id, true} ->
-                        Nadia.send_message(user_id, "From #{msg.chat.title}")
-                        Nadia.forward_message(user_id, to_string(msg.chat.id), msg.message_id)
-                    end
-                  end
-              end
-            end
-          end
-        end
+    if chat != nil do
+      chat.users
+      |> Enum.map(fn user_id -> Repo.get_by(User, id: user_id) end)
+      |> Enum.filter(fn user -> msg.from.username != user.username end)
+      |> Enum.map(fn user -> match_message(user, msg) end)
     end
+  end
+
+  defp match_message(user, msg) do
+    got_hit =
+      msg.text
+      |> String.split
+      |> Enum.map(fn word -> match_word(word, user.words) end)
+      |> Enum.any?
+
+    if got_hit do
+      Nadia.send_message(user.user_id, "From #{msg.chat.title}")
+      Nadia.forward_message(user.user_id, to_string(msg.chat.id), msg.message_id)
+    end
+  end
+
+  defp match_word(word, targets) do
+    Enum.map(targets, fn target ->
+      case Regex.compile("^#{target}$") do
+        {:ok, re} -> Regex.match?(re, word)
+        _ -> false
+      end
+    end)
+    |> Enum.any?
   end
 end
