@@ -18,7 +18,7 @@ defmodule TelegramBot.Commands do
     <> "/unmute - Unmute all notifications.\n"
     <> "/stop - Removes you completely and stops notifications.\n"
     <> "\n"
-    <> "Source (v1.1.0): https://github.com/rekyuu/elixir_telegram_bot/tree/kitakami"
+    <> "Source (v1.1.1): https://github.com/rekyuu/elixir_telegram_bot/tree/kitakami"
   end
 
   command "start" do
