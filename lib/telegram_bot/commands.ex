@@ -21,7 +21,7 @@ defmodule TelegramBot.Commands do
     <> "Source (v1.1.0): https://github.com/rekyuu/elixir_telegram_bot/tree/kitakami"
   end
 
-  command "start", do
+  command "start" do
     cond do
       if Enum.member?(["group", "supergroup"] ->
         reply "Please /start me in a private message!"
