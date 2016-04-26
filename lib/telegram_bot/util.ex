@@ -138,7 +138,7 @@ defmodule TelegramBot.Util do
     if chat != nil do
       chat.users
       |> Enum.map(fn user_id -> Repo.get_by(User, id: user_id) end)
-      |> Enum.filter(fn user -> msg.from.username != user.username end)
+      |> Enum.filter(fn user -> unless user == nil, do: msg.from.username != user.username end)
       |> Enum.map(fn user -> match_message(user, msg) end)
     end
   end
