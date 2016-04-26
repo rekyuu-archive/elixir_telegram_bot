@@ -21,7 +21,15 @@ defmodule TelegramBot.Commands do
     <> "Source (v1.1.0): https://github.com/rekyuu/elixir_telegram_bot/tree/kitakami"
   end
 
-  command "start", do: reply create_user(msg.from.username, msg.from.id)
+  command "start", do
+    cond do
+      if Enum.member?(["group", "supergroup"] ->
+        reply "Please /start me in a private message!"
+      true ->
+        reply create_user(msg.from.username, msg.from.id)
+    end
+  end
+
   command "stop",  do: reply remove_user(msg.from.username)
 
   command "add" do
