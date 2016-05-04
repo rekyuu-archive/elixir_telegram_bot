@@ -23,7 +23,7 @@ defmodule TelegramBot.Commands do
 
   command "start" do
     cond do
-      Enum.member?(["group", "supergroup"]) ->
+      Enum.member?(["group", "supergroup"], msg.chat.type) ->
         reply "Please /start me in a private message!"
       true ->
         reply create_user(msg.from.username, msg.from.id)
