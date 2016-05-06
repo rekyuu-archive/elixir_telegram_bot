@@ -21,8 +21,14 @@ defmodule TelegramBot.Polling do
     List.last(results).update_id
   end
 
-  def process_messages_list({:error, %Nadia.Model.Error{reason: _}}), do: Logger.log :warn, "Telegram timed out!"
-  def process_messages_list({:error, error}), do: Logger.log :error, error
+  def process_messages_list({:error, error}) do
+    case error do
+      %Nadia.Model.Error{reason: _} -> Logger.log :warn, "Telegram timed out!"
+      error ->                         Logger.log :error, error
+    end
+
+    -1
+  end
 
   def init(:ok) do
     send self, {:update, 0}
