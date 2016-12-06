@@ -1,5 +1,9 @@
 # Elixir Telegram Bot
 
+## This version is no longer maintained.
+
+Check out [Ooyodo](https://github.com/rekyuu/ooyodo) for the newer and more sane version.
+
 A elixir app that uses Telegram methods from [Nadia](https://github.com/zhyu/nadia) to poll for updates and respond to them.
 
 If you don't know much about Telegram bots, I suggest reading the [Telegram Bot API docs](https://core.telegram.org/bots/api).
