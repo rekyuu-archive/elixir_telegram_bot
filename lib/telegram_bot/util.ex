@@ -94,10 +94,10 @@ defmodule TelegramBot.Util do
             changeset = Ecto.Changeset.change chat, users: users
 
             case Repo.update(changeset) do
-              {:ok, _} -> "Disabled this chat for @#{user.username}."
+              {:ok, _} -> "Disabled chat \"#{chat.title}\" for @#{user.username}."
               {:error, _} -> "Ha! No. Talk to @rekyuu instead."
             end
-          false -> "This chat is already disabled for @#{user.username}."
+          false -> "\"#{chat.title}\" is already disabled for @#{user.username}."
         end
     end
   end
