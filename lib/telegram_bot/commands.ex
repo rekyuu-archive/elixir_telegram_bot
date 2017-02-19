@@ -75,6 +75,32 @@ defmodule TelegramBot.Commands do
   command "mute", do: reply mute(msg.from.username)
   command "unmute", do: reply unmute(msg.from.username)
 
+  command "info" do
+    case msg.reply_to_message do
+      nil -> "Please reply to a forwarded message for more information."
+      fwd ->
+        Nadia.send_message("""
+        **Chat**
+        ```
+        Title: #{fwd.chat.title}
+        ID: #{fwd.chat.id}
+        ```
+
+        **User**
+        ```
+        Username: @#{fwd.forward_from.username}
+        ID: #{fwd.forward_from.id}
+        ```
+
+        **Date and Time**
+        ```
+        Unix: #{fwd.date}
+        ISO8601: #{DateTime.from_unix!(fwd.date) |> DateTime.to_iso8601}
+        ```
+        """)
+    end
+  end
+
   match _ do
     if Enum.member?(["group", "supergroup"], msg.chat.type) && msg.text, do: launch_torpedoes(msg)
   end
