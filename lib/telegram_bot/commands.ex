@@ -80,19 +80,17 @@ defmodule TelegramBot.Commands do
       nil -> "Please reply to a forwarded message for more information."
       fwd ->
         Nadia.send_message(msg.from.id, """
-        **Chat**
+        Chat
         ```
         Title: #{fwd.chat.title}
         ID: #{fwd.chat.id}
         ```
-
-        **User**
+        User
         ```
         Username: @#{fwd.forward_from.username}
         ID: #{fwd.forward_from.id}
         ```
-
-        **Date and Time**
+        Date and Time
         ```
         Unix: #{fwd.date}
         ISO8601: #{DateTime.from_unix!(fwd.date) |> DateTime.to_iso8601}
