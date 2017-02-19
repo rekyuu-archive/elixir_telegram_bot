@@ -86,7 +86,7 @@ defmodule TelegramBot.Util do
     chat = Repo.get_by(Chat, chat_id: chat_id)
 
     case chat do
-      nil -> "This chat hasn't been enabled..."
+      nil -> "This chat hasn't been enabled or is invalid."
       chat ->
         case Enum.member?(chat.users, user.id) do
           true ->
