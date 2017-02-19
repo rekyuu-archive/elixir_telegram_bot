@@ -79,7 +79,7 @@ defmodule TelegramBot.Commands do
     case msg.reply_to_message do
       nil -> "Please reply to a forwarded message for more information."
       fwd ->
-        Nadia.send_message("""
+        Nadia.send_message(msg.from.id, """
         **Chat**
         ```
         Title: #{fwd.chat.title}
@@ -97,7 +97,7 @@ defmodule TelegramBot.Commands do
         Unix: #{fwd.date}
         ISO8601: #{DateTime.from_unix!(fwd.date) |> DateTime.to_iso8601}
         ```
-        """)
+        """, parse_mode: "Markdown")
     end
   end
 
