@@ -54,13 +54,13 @@ defmodule TelegramBot.Util do
     end
   end
 
-  def enable_chat(username, chat_id) do
+  def enable_chat(username, chat_id, title) do
     user = Repo.get_by(User, username: username)
     chat = Repo.get_by(Chat, chat_id: chat_id)
 
     case chat do
       nil ->
-        changeset = Chat.changeset(%Chat{}, %{chat_id: chat_id, users: [user.id]})
+        changeset = Chat.changeset(%Chat{}, %{chat_id: chat_id, users: [user.id], title: title})
 
         case Repo.insert(changeset) do
           {:ok, _} -> "Enabled this chat for @#{user.username}!"
@@ -140,6 +140,11 @@ defmodule TelegramBot.Util do
       |> Enum.map(fn user_id -> Repo.get_by(User, id: user_id) end)
       |> Enum.filter(fn user -> unless user == nil, do: msg.from.username != user.username end)
       |> Enum.map(fn user -> match_message(user, msg) end)
+
+      if chat.title != msg.chat.title do
+        changeset = Ecto.Changeset.change chat, title: msg.chat.title
+        Repo.update(changeset)
+      end
     end
   end
 

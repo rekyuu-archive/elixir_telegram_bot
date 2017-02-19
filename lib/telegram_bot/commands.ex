@@ -58,8 +58,8 @@ defmodule TelegramBot.Commands do
 
   command "enable" do
     case msg.chat.type do
-      "group" -> reply enable_chat(msg.from.username, to_string(msg.chat.id))
-      "supergroup" -> reply enable_chat(msg.from.username, to_string(msg.chat.id))
+      "group" -> reply enable_chat(msg.from.username, to_string(msg.chat.id), msg.chat.title)
+      "supergroup" -> reply enable_chat(msg.from.username, to_string(msg.chat.id), msg.chat.title)
       _ -> reply "You can only do this in group chats."
     end
   end

@@ -5,6 +5,7 @@ defmodule TelegramBot.Schema.Chat do
   schema "chats" do
     field :chat_id, :string
     field :users,   {:array, :integer}
+    field :title,   :string
   end
 
   def changeset(chat, params \\ :empty) do
