@@ -69,7 +69,7 @@ defmodule TelegramBot.Commands do
       "group" -> reply disable_chat(msg.from.username, to_string(msg.chat.id))
       "supergroup" -> reply disable_chat(msg.from.username, to_string(msg.chat.id))
       _ ->
-        [_ | chat_id] = String.split(msg.text)
+        [_ | chat_id] = String.split(msg.text) |> List.first
 
         case chat_id do
           nil -> reply "Please use in a group chat or by using the chat id."

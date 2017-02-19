@@ -156,7 +156,7 @@ defmodule TelegramBot.Util do
       |> Enum.any?
 
     if got_hit do
-      Nadia.send_message(user.user_id, "From #{msg.chat.title} (`#{msg.chat.id}`)")
+      Nadia.send_message(user.user_id, "From #{msg.chat.title} (`#{msg.chat.id}`)", parse_mode: "Markdown")
       Nadia.forward_message(user.user_id, to_string(msg.chat.id), msg.message_id)
     end
   end
